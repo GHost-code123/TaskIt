@@ -1,24 +1,32 @@
 #include "taskit.h"
 
+static const char	*star_bord = "*************************"
+								"******************************************"
+								"*********************************";
+static const char	*blank = "                               "
+							"                                 "
+							"                                    ";
+
+static void	show_banner(const char *username)
+{
+	printf("\n"
+		"%.20s%.40s\n" // upper border
+		"%.20s*                 >>>    TaskIt    <<<                 *\n" // Taskit title
+		"%.20s*  Welcome %20.20s to your task manager   *\n" // Welcome
+		"%.30s%.40s\n", // lower border
+		blank, star_bord,
+		blank, blank, username,
+		blank, star_bord);
+}
+
 int	main()
 {
-	char s[100] = {1};
-	char s1[100];
-	char s2[100];
-	char c;
+	char	username[21];
 
-	printf("1 here: ");
-	scanf("%[^\n]", s);
-	printf("2 here: ");
-	// c = getchar();
-	// printf("3 here: %d\n", c);
-	scanf("\n%c", &c);
-	printf("4 here: %d\n", c);
+	printf("Enter your name (max length: 20): ");
+	get_s(username, sizeof(username) - 1);
 
-
-	printf("> %s|\n", s);
-	printf("> %s|\n", s1);
-	printf("> %s|\n", s2);
+	show_banner(username);
 
 	return 0;
 }

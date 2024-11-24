@@ -7,12 +7,10 @@ char	*get_s(char *s, size_t n)
 	fgets(s, n, stdin);
 
 	p = strrchr(s, '\n');
-	if (p) {
-		printf("here\n");
+	if (p)
 		*p = 0;
-	} else {
+	else
 		clear_stdin();
-	}
 
 	return s;
 }

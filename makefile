@@ -6,3 +6,4 @@ SRC = main.c taskit.c utils.c
 
 all:
 	@gcc -fsanitize=address $(SRC) -o $(NAME)
+

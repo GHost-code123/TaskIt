@@ -17,6 +17,15 @@ char	*get_s(char *s, size_t n)
 	return s;
 }
 
+int	get_char()
+{
+	int	c;
+
+	c = getchar();
+	clear_stdin();
+	return c;
+}
+
 void	clear_stdin()
 {
 	int	c;

@@ -19,14 +19,62 @@ static void	show_banner(const char *username)
 		blank, star_bord);
 }
 
+static void	ask_to_continue()
+{
+	printf(HYEL"\n\t\t( Press ENTER to show main menu )"DFLT);
+	(void)getchar();
+}
+
+static void	show_main_menu()
+{
+	printf(BHGRN"Main menu: "DFLT"----------------+\n"
+			"|  (m) Manage tasks        |\n"
+			"|  (s) Save this task list |\n"
+			"|  (u) Change/Add user     |\n"
+			"|  (q) Exit                |\n"
+			);
+}
+
 int	main()
 {
-	char	username[21];
+	int		option;
 
-	printf("Enter your name (max length: 20): ");
-	get_s(username, sizeof(username) - 1);
+	// char	username[21];
 
-	show_banner(username);
+	// printf("Enter your name (max length: 20): ");
+	// get_s(username, sizeof(username) - 1);
+
+	// show_banner(username);
+
+	do {
+		show_main_menu();
+		printf(HYEL"> Enter your option: "DFLT);
+		option = get_char();
+
+		switch (option)
+		{
+		case 'm':
+			manage_tasks();
+			break;
+		case 's':
+			// Save task list
+			break;
+		case 'u':
+			// Change/Add user
+			break;
+		case 'q':
+			printf(HGRN"\nBye !\n"DFLT);
+			exit(0);
+			break;
+
+		default:
+			printf(BRED"\nInvalid option! Please, choose a valid option.\n"DFLT);
+			break;
+		}
+
+		usleep(700000);
+		ask_to_continue();
+	} while (69);
 
 	return 0;
 }

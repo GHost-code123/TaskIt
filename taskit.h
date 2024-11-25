@@ -19,8 +19,11 @@ typedef struct {
 void	manage_tasks();
 
 // Utils:
+char	*strjoin(char *s1, char *s2);
 char	*get_s(char *s, size_t n);
+int		get_line(char **s);
 int		get_char();
 void	clear_stdin();
+
 
 #endif /* TASKIT_H */

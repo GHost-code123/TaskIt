@@ -41,18 +41,11 @@ static void	show_main_menu()
 
 int	main()
 {
-<<<<<<< HEAD
+	int		option;
 	char	username[21] = "john Dike";
 
 	printf("Enter your name (max length: 20): ");
 	get_s(username, sizeof(username));
-=======
-	int		option;
-
-	// char	username[21];
-
-	// printf("Enter your name (max length: 20): ");
-	// get_s(username, sizeof(username) - 1);
 
 	// show_banner(username);
 
@@ -81,7 +74,6 @@ int	main()
 			printf(BRED"\nInvalid option! Please, choose a valid option.\n"DFLT);
 			break;
 		}
->>>>>>> 7f757a135029e9b600a4671592bb196f662742e0
 
 		usleep(700000);
 		ask_to_continue();

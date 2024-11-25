@@ -2,6 +2,7 @@
 
 void	add_task(Task *task_list)
 {
+	char	*desc = "";
 	Task	*new_task;
 
 	new_task = malloc(sizeof(*new_task));
@@ -11,7 +12,9 @@ void	add_task(Task *task_list)
 	}
 	printf("Enter task title (character limit: 50): ");
 	get_s(new_task->title, sizeof(new_task->title));
+
+
 	printf("Enter task description:\n");
-	while (getline())
+	while (get_line(new_task->desc));
 }
 

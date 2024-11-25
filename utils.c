@@ -1,5 +1,35 @@
 #include "taskit.h"
 
+char	*strjoin(char *s1, char *s2)
+{
+	size_t	len;
+	char	*str;
+
+	len = strlen(s1);
+	if (s2)
+		len += strlen(s2);
+
+	str = malloc(len + 1);
+	if (!str)
+		return NULL;
+
+	strcpy(str, s1);
+	free(s1);
+	strcat(str, s2);	
+
+	return str;
+}
+
+int	get_line(char **s)
+{
+	size_t	n = 0;
+
+	if (getline(s, &n, stdin) < 0)
+		return -1;
+
+	return 0;
+}
+
 char	*get_s(char *s, size_t n)
 {
 	char	*p;

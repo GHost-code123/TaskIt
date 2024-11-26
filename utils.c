@@ -5,9 +5,9 @@ char	*strjoin(char *s1, char *s2)
 	size_t	len;
 	char	*str;
 
-	len = strlen(s1);
-	if (s2)
-		len += strlen(s2);
+	if (!s1)
+		return (strdup(s2));
+	len = strlen(s1) + strlen(s2);
 
 	str = malloc(len + 1);
 	if (!str)
@@ -15,7 +15,7 @@ char	*strjoin(char *s1, char *s2)
 
 	strcpy(str, s1);
 	free(s1);
-	strcat(str, s2);	
+	strcat(str, s2);
 
 	return str;
 }
@@ -24,8 +24,10 @@ int	get_line(char **s)
 {
 	size_t	n = 0;
 
-	if (getline(s, &n, stdin) < 0)
+	if (getline(s, &n, stdin) < 0) {
+		clearerr(stdin);
 		return -1;
+	}
 
 	return 0;
 }

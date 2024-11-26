@@ -21,7 +21,7 @@ typedef struct s_task {
 }	Task;
 
 typedef struct {
-	int		size;
+	size_t	size;
 	Task	*head;
 	Task	*tail;
 } Tasklist;
@@ -29,7 +29,7 @@ typedef struct {
 
 void	manage_tasks();
 void	add_task(Tasklist *task_list);
-Task	*task_new();
+Task	*task_new(int id);
 
 // Utils:
 char	*strjoin(char *s1, char *s2);
@@ -38,5 +38,8 @@ int		get_line(char **s);
 int		get_char();
 void	clear_stdin();
 
+// UI:
+void	show_banner(const char *username);
+void	show_main_menu();
 
 #endif /* TASKIT_H */

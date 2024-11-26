@@ -41,13 +41,14 @@ static void	show_main_menu()
 
 int	main()
 {
-	int		option;
-	char	username[21] = "john Dike";
+	int			option;
+	char		username[21] = "john Dike";
+	Tasklist	task_list = {0, NULL, NULL};
 
 	printf("Enter your name (max length: 20): ");
 	get_s(username, sizeof(username));
 
-	// show_banner(username);
+	show_banner(username);
 
 	do {
 		show_main_menu();
@@ -57,7 +58,8 @@ int	main()
 		switch (option)
 		{
 		case 'm':
-			manage_tasks();
+			// manage_tasks();
+			add_task(&task_list);
 			break;
 		case 's':
 			// Save task list

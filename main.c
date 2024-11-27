@@ -3,16 +3,16 @@
 static void	set_username(char *username)
 {
 	printf("Enter your name (max length: 20): ");
-	scanf(" %20[^\n]", username);
-	clear_stdin();
+	get_s(username, 20);
 }
 
 int	main()
 {
 	int			option;
 	char		username[21] = "Lionel Messi";
-	Tasklist	tasklist = {0, NULL, NULL};
+	Tasklist	tasklist = {0, 0, 0, NULL, NULL};
 
+start:
 	set_username(username);
 
 	show_banner(username);
@@ -35,11 +35,11 @@ int	main()
 			
 			break;
 		case 'u':
-			// Change/Add user
+			free_tasklist(&tasklist);
+			goto start;
 			break;
 		case 'q':
-			printf(HGRN"\nBye !\n"DFLT);
-			exit(0);
+			exit_app(&tasklist);
 			break;
 
 		default:

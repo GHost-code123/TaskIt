@@ -31,7 +31,7 @@ void	show_banner(const char *username)
 
 void	show_main_menu()
 {
-	printf(BHGRN"Main menu: "HYEL"───────────────\n"DFLT
+	printf(BHGRN"\nMain menu: "HYEL"───────────────\n"DFLT
 			"   m - Manage tasks\n"
 			"   t - Show tasks list\n"
 			"   s - Save this task list\n"
@@ -44,11 +44,11 @@ void	show_tskmng_menu()
 {
 	printf(BLU"\nTask management menu: "HYEL"───────────────\n"DFLT
 		"   1 - Add a task\n"
-		"   2 - Show a task details\n"
+		"   2 - Show tasks details\n"
 		"   3 - Edit a task\n"
 		"   4 - Delete a task or more\n"
 		"   5 - Show tasks list\n"
-		"   q - Back to main menu\n\n"
+		"   0 - Back to main menu\n\n"
 		);
 }
 
@@ -57,17 +57,16 @@ void	show_tasks_table(Tasklist *tasklist, int show_options, int show_more)
 
 	printf( "╔═════╦════════════════════════════════════════════════════╦════════╦══════════╦════════════╗\n"
 			"║  "HGRN"ID"DFLT" ║                       "HGRN"Title"DFLT"                        ║ "
-			 HGRN"Status"DFLT" ║ "HGRN"Priority"DFLT" ║  "GRN"Due date"DFLT"  ║\n"
-			"╠═════╬════════════════════════════════════════════════════╬════════╬══════════╬════════════╣\n");
-
-	for (Task *task = tasklist->head; task != NULL; task = task->next)
-	{
-		printf("║%5.5d║%50s║%7s║%10s║");
-		printf("║     ║                                                    ║   ✅   ║  Medium  ║ 22-07-2024 ║\n"
-				"╠═════╬════════════════════════════════════════════════════╬════════╬══════════╬════════════╣\n"
-		"║     ║                                                    ║   ❌   ║  Medium  ║ 22-07-2024 ║\n"
-		"╠═════╬════════════════════════════════════════════════════╬════════╬══════════╬════════════╣\n"
-		);
+			 HGRN"Status"DFLT" ║ "HGRN"Priority"DFLT" ║  "GRN"Due date"DFLT"  ║\n");
+	if (tasklist->size == 0)
+		printf("╠═════╬════════════════════════════════════════════════════╬════════╬══════════╬════════════╣\n");
+	else {
+		for (Task *task = tasklist->head; task != NULL; task = task->next)
+		{
+			printf("╠═════╬════════════════════════════════════════════════════╬════════╬══════════╬════════════╣\n"
+					"║%5d║ %-50s ║   %s   ║%10c║ %s ║\n",
+					task->id, task->title, task->stat == COMPLETED ? "✅" : "❌", task->priority, task->duedate);
+		}
 	}
 	printf("╚═════╩════════════════════════════════════════════════════╩════════╩══════════╩════════════╝\n");
 }

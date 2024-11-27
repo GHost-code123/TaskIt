@@ -37,28 +37,24 @@ char	*get_s(char *s, size_t n)
 	char	*p;
 
 	*s = 0;
-	do {
-		fgets(s, n, stdin);
-	} while(*s && *s == '\n');
+	while (isspace((*s = getchar())));
+
+	fgets(s + 1, n - 1, stdin);
 
 	p = strrchr(s, '\n');
 	if (p)
 		*p = 0;
 	else
 		clear_stdin();
-
-	clearerr(stdin);
 	return s;
 }
 
-int	get_char()
+char	get_char()
 {
-	int	c;
+	char	c;
 
-	c = getchar();
-	if (c != '\n')
-		clear_stdin();
-	clearerr(stdin);
+	scanf(" %c", &c);
+	clear_stdin();
 	return c;
 }
 
@@ -67,4 +63,5 @@ void	clear_stdin()
 	int	c;
 
 	while ((c = getchar()) != '\n' && c != EOF);
+	clearerr(stdin);
 }

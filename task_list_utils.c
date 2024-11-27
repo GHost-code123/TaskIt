@@ -1,5 +1,4 @@
 #include "taskit.h"
-#include <ctype.h>
 
 static char	get_valid_priority()
 {
@@ -7,7 +6,7 @@ static char	get_valid_priority()
 
 	while (1)
 	{
-		c = get_char();
+		scanf(" %c", &c);
 		switch (toupper(c))
 		{
 		case 'L':
@@ -17,11 +16,31 @@ static char	get_valid_priority()
 
 		default:
 			printf(RED"%c is an invalid input\n"
-					YEL"Please choose a valid input 'H' (High), "
+					HYEL"Please choose a valid input 'H' (High), "
 					"'M' (Medium), 'L' (Low): "DFLT, c);
 			break ;
 		}
+		clearerr(stdin);
 	}
+}
+
+static void	set_date(char *buf)
+{
+	struct tm	date;
+
+	do {
+		scanf(" %2d-%2d-%4d", &date.tm_mday, &date.tm_mon, &date.tm_year);
+		clear_stdin();
+		
+		if (isvalid_date(&date))
+			break ;
+		clearerr(stdin);
+
+		printf(RED"Date is not valid\n"
+				YEL"Please enter a valid date (format: dd-mm-yyyy): "DFLT);
+	} while (1);
+
+	strftime(buf, 13, "%d-%m-%Y", &date);
 }
 
 Task	*task_new(int id)
@@ -33,18 +52,22 @@ Task	*task_new(int id)
 	if (task == NULL)
 		return NULL;
 
-	printf("Enter task title (character limit: 50): ");
+	printf(HYEL"> Enter task title (character limit: 50): "DFLT);
 	get_s(task->title, sizeof(task->title));
 
-	printf("Enter task description (Ctrl-D if done):\n");
+	printf(HYEL"> Type task description (Ctrl-D if done):\n"DFLT);
 	task->desc = NULL;
 	while (get_line(&desc) != -1)
 		task->desc = strjoin(task->desc, desc);
 
-	printf("Enter task priority 'H': High, 'M': Medium, 'L': Low (one character): ");
+	printf(HYEL"> Enter task priority 'H': High, 'M': Medium, 'L': Low (one character): "DFLT);
 	task->priority = get_valid_priority();
 
+	printf(HYEL"> Enter task due date (dd-mm-yyyy): "DFLT);
+	set_date(task->duedate);
+
 	task->id = id;
+	task->stat = INCOMPLETED;
 	return task;
 }
 
@@ -63,3 +86,9 @@ void	add_task(Tasklist *tasklist)
 	tasklist->tail = new_task;
 	tasklist->size++;
 }
+
+void	edit_task()
+{
+
+}
+

@@ -1,37 +1,38 @@
 #include "taskit.h"
 
-static void	ask_to_continue()
+static void	set_username(char *username)
 {
-	usleep(700000);
-	printf(HYEL"\n\t\t( Press ENTER to show main menu )"DFLT);
-	(void)getchar();
+	printf("Enter your name (max length: 20): ");
+	scanf(" %20[^\n]", username);
+	clear_stdin();
 }
 
 int	main()
 {
 	int			option;
-	char		username[21] = "john Dike";
-	Tasklist	task_list = {0, NULL, NULL};
+	char		username[21] = "Lionel Messi";
+	Tasklist	tasklist = {0, NULL, NULL};
 
-	// printf("Enter your name (max length: 20): ");
-	// get_s(username, sizeof(username));
+	set_username(username);
 
 	show_banner(username);
+	show_tasks_table(&tasklist, 0, 0);
 
 	do {
 		show_main_menu();
-		printf(HYEL"> Enter your option: "DFLT);
+		printf(YEL"Enter your option: "DFLT);
 		option = get_char();
-		// option = 'm';
 
-		switch (option)
+		switch (tolower(option))
 		{
 		case 'm':
-			// manage_tasks();
-			add_task(&task_list);
+			manage_tasks(&tasklist);
+			break;
+		case 't':
+			show_tasks_table(&tasklist, 0, 1);
 			break;
 		case 's':
-			// Save task list
+			
 			break;
 		case 'u':
 			// Change/Add user
@@ -43,11 +44,10 @@ int	main()
 
 		default:
 			printf(BRED"\nInvalid option! Please, choose a valid option.\n"DFLT);
+			ask_to_continue();
 			break;
 		}
-
-		ask_to_continue();
-	} while (69);
+	} while (42);
 
 	return 0;
 }

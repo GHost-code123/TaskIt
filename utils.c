@@ -1,64 +1,27 @@
-#include "taskit.h"
+#include <time.h>
 
-char	*strjoin(char *s1, char *s2)
-{
-	size_t	len;
-	char	*str;
-
-	if (!s1)
-		return (strdup(s2));
-	len = strlen(s1) + strlen(s2);
-
-	str = malloc(len + 1);
-	if (!str)
-		return NULL;
-
-	strcpy(str, s1);
-	free(s1);
-	strcat(str, s2);
-
-	return str;
+static int	isleap(int year) {
+    return (year % 4 == 0 && year % 100 != 0) || (year % 400 == 0);
 }
 
-int	get_line(char **s)
+int	isvalid_date(struct tm *date)
 {
-	size_t	n = 0;
+	int month_day[] = {31, 28, 31, 30, 31, 30, 31, 31, 30, 31, 30, 31};
 
-	if (getline(s, &n, stdin) < 0) {
-		clearerr(stdin);
-		return -1;
-	}
+    if (date->tm_year <= 0)
+        return 0;
 
-	return 0;
-}
+    if (date->tm_mon < 1 || date->tm_mon > 12)
+        return 0;
 
-char	*get_s(char *s, size_t n)
-{
-	char	*p;
+    if (date->tm_mon == 2 && isleap(date->tm_year)) {
+        if (date->tm_mday < 1 || date->tm_mday > 29)
+            return 0;
+    }
+    else {
+        if (date->tm_mday < 1 || date->tm_mday > month_day[date->tm_mon - 1])
+            return 0;
+    }
 
-	fgets(s, n, stdin);
-
-	p = strrchr(s, '\n');
-	if (p)
-		*p = 0;
-	else
-		clear_stdin();
-
-	return s;
-}
-
-int	get_char()
-{
-	int	c;
-
-	c = getchar();
-	clear_stdin();
-	return c;
-}
-
-void	clear_stdin()
-{
-	int	c;
-
-	while ((c = getchar()) != '\n' && c != EOF);
+    return 1;
 }

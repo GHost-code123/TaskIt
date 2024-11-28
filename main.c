@@ -3,7 +3,7 @@
 static void	set_username(char *username)
 {
 	printf("Enter your name (max length: 20): ");
-	get_s(username, 20);
+	get_s(username, 21);
 }
 
 int	main()
@@ -16,7 +16,7 @@ start:
 	set_username(username);
 
 	show_banner(username);
-	show_tasks_table(&tasklist, 0, 0);
+	show_tasks_table(&tasklist, -1, -1);
 
 	do {
 		show_main_menu();
@@ -29,10 +29,10 @@ start:
 			manage_tasks(&tasklist);
 			break;
 		case 't':
-			show_tasks_table(&tasklist, 0, 1);
+			show_tasks_table(&tasklist, -1, -1);
 			break;
 		case 's':
-			
+			save_user_tasklist(&tasklist, username);
 			break;
 		case 'u':
 			free_tasklist(&tasklist);

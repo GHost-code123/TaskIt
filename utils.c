@@ -25,3 +25,10 @@ int	isvalid_date(struct tm *date)
 
     return 1;
 }
+
+char	*get_curtime()
+{
+	const time_t	tm = time(NULL);
+
+	return ctime(&tm);
+}

@@ -15,9 +15,8 @@ void	free_tasklist(Tasklist *tasklist)
 	task = tasklist->head;
 	while (task != NULL)
 	{
-		// printf("here\n");
 		tmp = task->next;
-		free(task);
+		free_task(task);
 		task = tmp;
 	}
 }
@@ -31,7 +30,6 @@ void	fatal_error(Tasklist *tasklist)
 
 void	exit_app(Tasklist *tasklist)
 {
-	// Wanna save
 	free_tasklist(tasklist);
 	printf(HGRN"\nBye !\n"DFLT);
 	exit(0);

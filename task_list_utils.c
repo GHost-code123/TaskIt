@@ -110,7 +110,6 @@ void	tasklist_sort_byPriority(Tasklist *tasklist)
 			}
 			ptr = ptr->next;
         }
-		printf("here\n");
 		lptr = ptr;
 	}
 	while (swapped);

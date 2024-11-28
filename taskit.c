@@ -282,7 +282,7 @@ void	sort_task_list(Tasklist *tasklist)
 				"  0 - Back to manage menu\n\n");
 	
 	printf(YEL"Enter your option: "DFLT);
-	scanf(" %d", &option);
+	scanf(" %1d", &option);
 	clear_stdin();
 
 	if (tasklist->size == 0) {
@@ -330,7 +330,7 @@ void	manage_tasks(Tasklist *tasklist)
 	do {
 		show_tskmng_menu();
 		printf(YEL"Enter your option: "DFLT);
-		scanf(" %d", &option);
+		scanf(" %1d", &option);
 		clear_stdin();
 
 		switch (option)
